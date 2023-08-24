@@ -1,0 +1,471 @@
+{
+	"info": {
+		"_postman_id": "7494ac13-e7a0-4b5f-820d-c9ddd0f57a77",
+		"name": "User Events",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9782658",
+		"_collection_link": "https://innomate.postman.co/workspace/Innomesh~ee36ef01-5723-4adc-8664-85d5a3e3df95/collection/9782658-7494ac13-e7a0-4b5f-820d-c9ddd0f57a77?action=share&source=collection_link&creator=9782658"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"testuser2\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				},
+				"description": "Register user"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/login",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "secret",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mjc1NDI5OCwianRpIjoiYTM3NWVkZTQtNmQ0Ny00MTI5LWFkNmItNTM4NGNhMGZmYzhmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkyNzU0Mjk4LCJleHAiOjE2OTI3NTUxOTh9.NIhfzRP8aZneBBIIW0RlBIVBAZgtdTiXC7m7qlhfv64",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"testuser1\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Login"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/events",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mjg1MDU0MywianRpIjoiMmE3ZTVhZWYtYjgwNC00YzcyLWI5OWQtZjVhZWUzYmExNmFlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkyODUwNTQzLCJleHAiOjE2OTI4NTE0NDN9.8Y5Wc0EDkXd7x7tpPt9LNAIrRB4QRrIN2iR3Yb8VjEQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/events?title=Event 2&description=Event Two of User 1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Event 2"
+						},
+						{
+							"key": "description",
+							"value": "Event Two of User 1"
+						}
+					]
+				},
+				"description": "Add Event"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"testuser3\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				},
+				"description": "Create a new user"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/login",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "secret",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mjc1NDI5OCwianRpIjoiYTM3NWVkZTQtNmQ0Ny00MTI5LWFkNmItNTM4NGNhMGZmYzhmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkyNzU0Mjk4LCJleHAiOjE2OTI3NTUxOTh9.NIhfzRP8aZneBBIIW0RlBIVBAZgtdTiXC7m7qlhfv64",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"testuser1\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Login user"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/events",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mjg1MDU0MywianRpIjoiMmE3ZTVhZWYtYjgwNC00YzcyLWI5OWQtZjVhZWUzYmExNmFlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkyODUwNTQzLCJleHAiOjE2OTI4NTE0NDN9.8Y5Wc0EDkXd7x7tpPt9LNAIrRB4QRrIN2iR3Yb8VjEQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Event 2\",\n    \"description\": \"Event Four of User 1\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/event",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"event"
+					]
+				},
+				"description": "Get all events and search"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/event",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mjg1MDU0MywianRpIjoiMmE3ZTVhZWYtYjgwNC00YzcyLWI5OWQtZjVhZWUzYmExNmFlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkyODUwNTQzLCJleHAiOjE2OTI4NTE0NDN9.8Y5Wc0EDkXd7x7tpPt9LNAIrRB4QRrIN2iR3Yb8VjEQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Event 2\",\n    \"description\": \"Event Four of User 1\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/event",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"event"
+					]
+				},
+				"description": "create an event"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/user/events",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MjgzMDg2OSwianRpIjoiOGMzYzE2ZDctMTY0YS00ODAxLTgxNTYtM2FmM2IzMWJjNzIxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkyODMwODY5LCJleHAiOjE2OTI4MzE3Njl9.qntefGI53PbjCl4y0n3iM4EtM8tOpv3wshDiNnQC8oY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/user/events",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"events"
+					]
+				},
+				"description": "Get events of a user"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/event/2",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MjgzMTEyOCwianRpIjoiMWU1MTA2NWQtZTZiZi00ZjE4LTk1YTEtZjY3YjdhNzVhMTEzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkyODMxMTI4LCJleHAiOjE2OTI4MzIwMjh9.r4IC6dMaYxFj7XHySr3WspCnYHmWYJ6cCG5pYH3K8bQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"description\": \"Event Twooooo of User 1\",\n        \"event_id\": 2,\n        \"title\": \"Event 22222\",\n        \"user_id\": 1\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/event/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"event",
+						"2"
+					]
+				},
+				"description": "Update an event"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/event/2",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MjgzMTEyOCwianRpIjoiMWU1MTA2NWQtZTZiZi00ZjE4LTk1YTEtZjY3YjdhNzVhMTEzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkyODMxMTI4LCJleHAiOjE2OTI4MzIwMjh9.r4IC6dMaYxFj7XHySr3WspCnYHmWYJ6cCG5pYH3K8bQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/event/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"event",
+						"2"
+					]
+				},
+				"description": "Delete an event"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/events",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Mjg4NDk0NiwianRpIjoiZTM1NGUzZDUtOWUwMC00NWFiLTk3NTYtYjA4OWUzMjYyYmM1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkyODg0OTQ2LCJleHAiOjE2OTI4ODU4NDZ9.NlL2iP9lRkIyLf8t0WxVSqPsAiiTNeG3y9YlKDj98pE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Event 1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/events?title=Event 2&description=Event Two of User 1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Event 2"
+						},
+						{
+							"key": "description",
+							"value": "Event Two of User 1"
+						}
+					]
+				},
+				"description": "Get Events with search options title and description"
+			},
+			"response": []
+		}
+	]
+}
