@@ -7,11 +7,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask import request, jsonify
-from flask_restful import Api
+
+from config import SECRET_KEY, SQLALCHEMY_DATABASE_URI
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'testing secret key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/userevents'
+app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
@@ -20,7 +21,20 @@ parser = reqparse.RequestParser()
 parser.add_argument('title', type=str, required=True, help="Title cannot be blank")
 parser.add_argument('description', type=str, required=True, help="Description cannot be blank")
 
+# User model
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
 
+# Event Model
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+# Add new user
 @app.route('/event', methods=['POST'])
 @jwt_required()
 def add_user_event():
@@ -39,6 +53,7 @@ def add_user_event():
             'user_id': new_event.user_id}, 201
 
 
+# Update/delete existing event
 class UserEvent(Resource):
     @jwt_required()
     def put(self, event_id):
@@ -50,7 +65,7 @@ class UserEvent(Resource):
         event.description = data['description']
         db.session.commit()
         return {'message': 'Event updated', 'event_id':event.id, 'title': event.title,
-                'description':event.description, 'user_id': event.user_id}
+                'description':event.description, 'user_id': event.user_id}, 200
 
     @jwt_required()
     def delete(self, event_id):
@@ -61,7 +76,7 @@ class UserEvent(Resource):
         db.session.commit()
         return {'message': 'Event deleted'}
 
-
+# Get logged in user events
 @app.route('/user/events', methods=['GET'])
 @jwt_required()
 def get_user_events():
@@ -72,12 +87,17 @@ def get_user_events():
     return event_list
 
 
+# Get events by search keyword 'title' or 'description'; nothing passed then returns all events
 @app.route('/events', methods=['GET'])
 @jwt_required()
 def get_all_events():
-    data = request.get_json()
-    title = data.get('title')
-    description = data.get('description')
+    # data = request.get_json()
+    # title = data.get('title')
+    # description = data.get('description')
+
+    title = request.args.get('title')
+    description = request.args.get('description')
+
     print(title, description)
     if title and description is None:
         events = Event.query.filter_by(title=title).all()
@@ -96,25 +116,14 @@ def get_all_events():
     return event_list
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
-
-
-class Event(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-
+# Database initialization command
 @app.cli.command("initdb")
 def initdb_command():
     db.create_all()
     print("Database initialized")
 
 
+# Add a new user, with Username and Password. Password would be saved as hashed key in the backend.
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -127,6 +136,7 @@ def register():
     return jsonify({'message': 'User registered successfully'})
 
 
+# Login user, it returns JWT token which should be used to next operations in header authorization.
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -138,10 +148,6 @@ def login():
         access_token = create_access_token(identity=user.id)
         return jsonify({'access_token': access_token})
     return jsonify({'message': 'Invalid Credentials'}), 401
-
-
-api = Api(app)
-api.add_resource(UserEvent, '/event/<int:event_id>')
 
 if __name__ == '__main__':
     app.run(port=8080, debug=True)
