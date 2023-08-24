@@ -17,7 +17,7 @@ All Operations - CRUD calls
 2. Login User with credentials: POST localhost:8080/login
 3. Add a new Event: POST localhost:8080/event
 4. Get User specific events: GET localhost:8080/user/events
-5. Get all events and filter option with title and description: GET localhost:8080/events
+5. Get all events and filter option with title and description: GET localhost:8080/events?title=event1&description=test_event
 6. Update an Event by using Event ID: PUT localhost:8080/event/2
 7. Delete an Event by using Event ID: DELETE localhost:8080/event/2
 
@@ -25,9 +25,10 @@ All Operations - CRUD calls
 
 1. Set up Postgres database and update SQLALCHEMY_CONFIG_URI as per your configuration.
 2. To view database contents, you can use PGAdmin
-3. Run "flask init" to create Database models in Database tables.
-4. Run Flask app, it will start run in Debug mode on 8080 port.
-5. Once application successfully started, you can refer to Postman collection and run/test all operations.
+3. Run command pip install -r requirements.txt
+4. Run "flask init" to create Database models in Database tables.
+5. Run Flask app, it will start run in Debug mode on 8080 port.
+6. Once application successfully started, you can refer to Postman collection and run/test all operations.
 
 
 
